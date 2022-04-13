@@ -14,20 +14,21 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: apt update && \
-             apt install -y mkdocs python3-pip && \
-             pip3 install --no-cache-dir \
+      - name: Updates the package lists
+        run: apt update
+      - name: Install MkDocs & Python3
+        run: apt install -y mkdocs python3-pip && \
+      - name: Install MkDocs plugins
+        run: pip3 install --no-cache-dir \
                  mkdocs-awesome-pages-plugin \
                  mkdocs-minify-plugin \
                  mkdocs-git-revision-date-localized-plugin \
                  mkdocs-bibtex \
                  mkdocs-img2fig-plugin \
                  mkdocs-mermaid2-plugin \
-                 mkdocs-render-swagger-plugin && \
-             pwd && \
-             which python3 && \
-             pip3 install -r ../requirements.txt
+                 mkdocs-render-swagger-plugin
+      - name: Install extra addons
+        run: pip3 install -r ../requirements.txt
       - name: Build website
         run: mkdocs build
       - name: Set AWS credentials
