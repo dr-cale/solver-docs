@@ -151,9 +151,6 @@ markdown_extensions:
   - codehilite
   - meta
   - attr_list
-  - toc:
-      slugify: !!python/name:pymdownx.slugs.uslugify
-      permalink: ""
   - pymdownx.details
   - pymdownx.progressbar
   - pymdownx.betterem:
