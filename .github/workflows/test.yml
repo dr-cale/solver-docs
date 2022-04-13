@@ -19,17 +19,8 @@ jobs:
       - name: Updates the package lists
         run: sudo apt update
       - name: Install MkDocs & Python3
-        run: sudo apt install -y mkdocs python3-pip
+        run: sudo apt install -y mkdocs==1.3.0 python3-pip
       - name: Install MkDocs plugins
-        run: pip3 install --no-cache-dir \
-             mkdocs-awesome-pages-plugin \
-             mkdocs-minify-plugin \
-             mkdocs-git-revision-date-localized-plugin \
-             mkdocs-bibtex \
-             mkdocs-img2fig-plugin \
-             mkdocs-mermaid2-plugin \
-             mkdocs-render-swagger-plugin
-      - name: Install extra addons
         run: pip3 install -r documentation/.github/requirements.txt
       #- name: List installed packages
       #  run: pip3 freeze | grep -e tornado -e markdown -e mkdocs
