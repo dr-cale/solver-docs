@@ -15,8 +15,8 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        run: sudo apt update
-              sudo apt install -y mkdocs python3-pip
+        run: sudo apt update && \
+              sudo apt install -y mkdocs python3-pip && \
               pip3 install --no-cache-dir \
                 mkdocs-awesome-pages-plugin \
                 mkdocs-minify-plugin \
@@ -24,9 +24,9 @@ jobs:
                 mkdocs-bibtex \
                 mkdocs-img2fig-plugin \
                 mkdocs-mermaid2-plugin \
-                mkdocs-render-swagger-plugin
-              pwd
-              which python3
+                mkdocs-render-swagger-plugin && \
+              pwd && \
+              which python3 && \
               pip3 install -r ../requirements.txt
       - name: Build website
         run: mkdocs build
