@@ -12,6 +12,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
       - uses: actions/setup-python@v2
+        with:
+            python-version: 3.x
       - name: Install dependencies
         run: sudo apt update &&
               sudo apt install -y mkdocs python3-pip && \
