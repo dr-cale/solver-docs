@@ -15,9 +15,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        run: sudo apt update && \
-              sudo apt install -y mkdocs python3-pip && \
-              pip3 install --no-cache-dir \
+        run: apt update && \
+            apt install -y mkdocs python3-pip && \
+            pip3 install --no-cache-dir \
                 mkdocs-awesome-pages-plugin \
                 mkdocs-minify-plugin \
                 mkdocs-git-revision-date-localized-plugin \
@@ -25,9 +25,9 @@ jobs:
                 mkdocs-img2fig-plugin \
                 mkdocs-mermaid2-plugin \
                 mkdocs-render-swagger-plugin && \
-              pwd && \
-              which python3 && \
-              pip3 install -r ../requirements.txt
+            pwd && \
+            which python3 && \
+            pip3 install -r ../requirements.txt
       - name: Build website
         run: mkdocs build
       - name: Set AWS credentials
