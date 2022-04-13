@@ -22,13 +22,13 @@ jobs:
         run: sudo apt install -y mkdocs python3-pip && \
       - name: Install MkDocs plugins
         run: pip3 install --no-cache-dir \
-                 mkdocs-awesome-pages-plugin \
-                 mkdocs-minify-plugin \
-                 mkdocs-git-revision-date-localized-plugin \
-                 mkdocs-bibtex \
-                 mkdocs-img2fig-plugin \
-                 mkdocs-mermaid2-plugin \
-                 mkdocs-render-swagger-plugin
+             mkdocs-awesome-pages-plugin \
+             mkdocs-minify-plugin \
+             mkdocs-git-revision-date-localized-plugin \
+             mkdocs-bibtex \
+             mkdocs-img2fig-plugin \
+             mkdocs-mermaid2-plugin \
+             mkdocs-render-swagger-plugin
       - name: Install extra addons
         run: pip3 install -r ../requirements.txt
       - name: Build website
