@@ -10,14 +10,16 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      #- uses: actions/setup-node@v2
       - uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Verify user
+        run: whoami
       - name: Updates the package lists
-        run: apt update
+        run: apt-get update
       - name: Install MkDocs & Python3
-        run: apt install -y mkdocs python3-pip && \
+        run: apt-get install -y mkdocs python3-pip && \
       - name: Install MkDocs plugins
         run: pip3 install --no-cache-dir \
                  mkdocs-awesome-pages-plugin \
