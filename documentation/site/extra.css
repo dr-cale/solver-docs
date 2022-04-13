@@ -1,0 +1,13 @@
+:root {
+  --md-primary-fg-color: #20344F;
+  --md-accent-fg-color: #20344F;
+}
+
+#api-thingsolver-url {
+  color: #0056d6;
+  font-weight: 700;
+}
+
+table thead tr {
+  background-color: #f0f0f0;
+}

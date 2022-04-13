@@ -1,0 +1,198 @@
+site_name: Solver AI Suite
+site_author: Sinisa Jovic
+
+theme:
+    palette:
+      primary: stylesheets/extra.css
+    name: material
+    logo: assets/images/things_solver_bright_logo.png
+    favicon: assets/icons/TSicon.ico
+    subMenuItems:
+      - Adaptive UI
+    hiddenSidenav:
+      - Schema explorer
+    features:
+      - tabs
+      - navigation.tabs
+      - navigation.indexes
+      - navigation.top
+      - navigation.instant
+      - search.highlight
+      # - toc.integrate
+      - content.tabs.link
+      - content.grids
+    # custom_dir: theme
+    icon:
+      repo: fontawesome/brands/git-alt
+nav:
+  - Home: index.md
+  - Developers Portal:
+    - Getting Started:
+        - overview/index.md
+        # - Onboarding:
+        #     - Data Models: data_model/index.md
+        #     - Connectors: data_connection/index.md
+    - Integration: 
+      - Data Models Overview: data-models/index.md
+      # - Integration:
+      #   - Products: data-models/integration/products.md
+      #   - Customers: data-models/integration/customers.md
+      #   - Transactions: data-models/integration/transactions.md
+      #   - Leaflet: data-models/integration/leaflet.md
+      #   - Clicks: data-models/integration/clicks.md
+      # - AI Models:
+      - Studios: #data-models/studios/index.md
+        - Customer Studio: data-models/studios/customer-studio.md
+          # - Audience Studio: data-models/studios/customer-studio-audience-studio.md
+        - Product Studio: data-models/studios/product-studio.md
+          # - Smart Leaflet: data-models/studios/product-studio-smart-leaflet.md
+        - Campaigning Studio: data-models/studios/campaigning-studio.md
+        - Touchpoint Studio: data-models/studios/touchpoint-studio.md
+      - AI Models:
+        - Solver Smart Search: data-models/ai-models/solver-smart-search/solver-smart-search.md
+      - Connectors: 
+          - data-connection/index.md
+    # - API:
+    #     - api-documentation/index.md
+    - AI Models:
+      - AI Models Overview: ai-models/index.md
+      - Solver Recommenders: 
+        - Recommenders Overview: ai-models/solver-recommenders/solver-recommenders.md
+        - CB Recommender: ai-models/solver-recommenders/solver-recommenders-cb.md
+        - SVD Recommender: ai-models/solver-recommenders/solver-recommenders-svd.md
+      - Solver Segmentations:
+        - RFMT: ai-models/solver-segmentations/solver-rfmt.md
+    - Customer Studio: 
+        - Overview: studios/product-studio/index.md
+    - Product Studio: 
+        - Overview: studios/product-studio/index.md
+    - Campaigning: 
+        - Overview: studios/campaigning-studio/index.md
+        - Channels:
+          - Viber: studios/campaigning-studio/viber/viber-channel.md
+          - SMS: studios/campaigning-studio/sms/sms-channel.md
+          - Email: studios/campaigning-studio/email/email-channel.md
+          - Omni: studios/campaigning-studio/omni/omni-channel.md
+        - Personalization:
+          - Viber: studios/campaigning-studio/viber/viber-channel-personalization.md
+          - SMS: studios/campaigning-studio/sms/sms-channel-personalization.md
+          - Email: studios/campaigning-studio/email/email-channel-personalization.md
+          - Omni: studios/campaigning-studio/omni/omni-channel-personalization.md
+    - Touchpoint Studio: 
+        - Overview: studios/product-studio/index.md
+  - API:
+    # - Getting Started:
+    #   - api-documentation/index.md
+    - Campaigning Studio API: 
+      - api-documentation/campaigning-studio/index.md
+    - Touchpoint Studio API: 
+      - api-documentation/touchpoint-studio/index.md
+  - Support: 
+    - support-guide/index.md
+  - Release Notes: 
+    - release-notes/index.md
+  - Documentation:
+    - User Guide:
+      - User Guide Overview: user-guide/index.md
+      - Campaigning Studio: user-guide/studios/campaigning-studio.md
+
+
+extra:
+  analytics: 
+      feedback:
+        title: Was this page helpful?
+        ratings:
+          - icon: material/emoticon-happy-outline
+            name: This page was helpful
+            data: 1
+            note: >-
+              Thanks for your feedback!
+          - icon: material/emoticon-sad-outline
+            name: This page could be improved
+            data: 0
+            note: >- 
+              Thanks for your feedback! Help us improve this page by
+              using our <a href="..." target=_blank>feedback form</a>.
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+  extra:
+  env: HTML
+  social:
+    - icon: fontawesome/brands/git
+      link: https://github.com/ThingsSolver
+    - icon: fontawesome/brands/twitter
+      # link: https://twitter.com/asseco_see
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/organization-guest/company/things-solver
+      
+  # homepage: https://thingsolver.com
+  # social:
+  #   - icon: fontawesome/brands/twitter 
+  #     link: https://twitter.com/squidfunk
+
+markdown_extensions:
+  # - meta To disable navigations
+  - codehilite
+  - pymdownx.extra
+  - attr_list
+  - md_in_html
+  - admonition
+  - pymdownx.details
+  - tables
+  - markdown.extensions.admonition
+  - pymdownx.emoji
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - admonition
+  - codehilite
+  - meta
+  - attr_list
+  - toc:
+      slugify: !!python/name:pymdownx.slugs.uslugify
+      permalink: ""
+  - pymdownx.details
+  - pymdownx.progressbar
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.magiclink:
+      repo_url_shortener: true
+      repo_url_shorthand: true
+      social_url_shorthand: true
+      social_url_shortener: true
+  - pymdownx.tabbed
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+
+plugins:
+  - search
+  - mermaid2
+  - awesome-pages
+  - tags
+  - render_swagger
+
+extra_css:
+  - assets/css/extra.css
+  # - assets/css/swagger-ui.css
+
+extra_javascript:
+   - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
+   - assets/javascripts/tablesort.js
+   - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
+  #  - assets/javascripts/swagger-ui-bundle.js
+   - javascripts/tablesort.js
+
+use_directory_urls: false
+

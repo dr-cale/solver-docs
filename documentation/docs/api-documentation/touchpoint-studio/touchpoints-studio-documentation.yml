@@ -1,0 +1,559 @@
+openapi: 3.0.0
+info:
+  title: Solver Touchpoints Studio
+  description: This api is meant for Solver Touchpoints Studio product
+  version: 1.0.0
+servers:
+- url: https://solver-ai.{customerHost}:{port}/api/latest/
+  variables:
+    customerHost:
+      description: Customer hostname
+      default: thingsolver
+    port:
+      default: "443"
+      enum:
+      - "443"
+      - "8443"
+- url: http://solver-ai.{customerId}:{port}/api/latest/
+  variables:
+    customerHost:
+      description: Customer hostname
+      default: thingsolver
+    port:
+      default: "80"
+      enum:
+      - "80"
+      - "8080"
+security:
+- bearerAuth: []
+tags:
+- name: Touchpoints API
+  description: API used to to configure and create Touchpoints
+  externalDocs:
+    url: http://business.solverapi.ai/touchpoints
+paths:
+  /solver-touchpoint/touchpoints:
+  # Show products, etc...
+    get:
+      tags:
+      - Touchpoints API
+      summary: Get list of touchpoints
+      description: Return touchpoint list
+      operationId: GetTouchpoints
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      - name: offset
+        in: query
+        description: Number of views to skip
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 10
+          default: 0
+      - name: limit
+        in: query
+        description: Number of views to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 50
+          default: 10
+      responses:
+        "200":
+          description: Touchpoint list response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointListResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+  /solver-touchpoint/touchpoints/{touchpoint_id}:
+    get:
+      tags:
+      - Touchpoints API
+      summary: Get touchpoint
+      description: Return touchpoint for customer
+      operationId: GetTouchpoint
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      responses:
+        "200":
+          description: Touchpoint list response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    put:
+      tags:
+      - Touchpoints API
+      summary: Update touchpoint
+      description: Update touchpoint for customer
+      operationId: PutTouchpoint
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      requestBody:
+        description: Accepts touchpoint settings
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TouchpointRequest'
+        required: true
+      responses:
+        "200":
+          description: Touchpoint response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    post:
+      tags:
+      - Touchpoints API
+      summary: Create touchpoint
+      description: Create touchpoint for customer
+      operationId: PostTouchpoint
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      requestBody:
+        description: Accepts touchpoint settings
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TouchpointRequest'
+        required: true
+      responses:
+        "201":
+          description: Touchpoint response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointResponse'
+        "400":
+          description: Touchpoint exists response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyAlreadyExists'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    delete:
+      tags:
+      - Touchpoints API
+      summary: Delete touchpoint
+      description: Delete touchpoint
+      operationId: DeleteTouchpoint
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      responses:
+        "200":
+          description: Item deleted response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointDeleted'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-touchpoint/views:
+    get:
+      tags:
+      - Touchpoints API
+      summary: List of views
+      description: Return views list
+      operationId: GetTouchpointViews
+      parameters:
+        - name: offset
+          in: query
+          description: Number of views to skip
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            example: 10
+            default: 0
+        - name: limit
+          in: query
+          description: Number of views to be returned
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            example: 50
+            default: 10
+      responses:
+        "200":
+          description: View list response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ViewsListResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+  /solver-touchpoint/views/{view_id}:
+    get:
+      tags:
+      - Touchpoints API
+      summary: Specific view
+      description: Return specific view
+      operationId: GetTouchpointView
+      parameters:
+      - name: view_id
+        in: path
+        description: Unique view identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: view_1
+      responses:
+        "200":
+          description: Touchpoint list response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ViewResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    put:
+      tags:
+      - Touchpoints API
+      summary: Update view
+      description: Update specific view
+      operationId: PutTouchpointView
+      parameters:
+      - name: view_id
+        in: path
+        description: Unique view identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: view_1
+      requestBody:
+        description: Update touchpoint view
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TouchpointRequest'
+        required: true
+      responses:
+        "200":
+          description: Touchpoint response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    post:
+      tags:
+      - Touchpoints API
+      summary: Create view
+      description: Create touchpoint view
+      operationId: PostTouchpointView
+      parameters:
+      - name: view_id
+        in: path
+        description: Unique view identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: view_1
+      requestBody:
+        description: Accepts touchpoint settings
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TouchpointRequest'
+        required: true
+      responses:
+        "201":
+          description: Touchpoint response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointResponse'
+        "400":
+          description: Touchpoint exists response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyAlreadyExists'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+    delete:
+      tags:
+      - Touchpoints API
+      summary: Delete view
+      description: Delete touchpoint view
+      operationId: DeleteItem
+      parameters:
+      - name: view_id
+        in: path
+        description: Unique view identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: view_1
+      responses:
+        "200":
+          description: Item deleted response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointDeleted'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  
+  /solver-touchpoint/touchpoints/{touchpoint_id}/content:
+    get:
+      tags:
+      - Touchpoints API
+      summary: Touchpoint content
+      description: Return touchpoint content
+      operationId: GetTouchpointContent
+      parameters:
+      - name: touchpoint_id
+        in: path
+        description: Unique touchpoint identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: touchpoint_1
+      - name: identity_type
+        in: header
+        description: Type of identity 
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "customer_id"
+      - name: identity_value
+        in: header
+        description: Value of identity 
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "uuhsduwiashhduehsue"
+      responses:
+        "200":
+          description: Touchpoint list response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TouchpointContent'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "404":
+          description: Touchpoint not found response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/ContactPolicyNotFound'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/DatabaseConnectionError'
+
+

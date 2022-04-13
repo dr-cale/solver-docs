@@ -1,0 +1,8 @@
+﻿Data Group,transactions
+Entity,invoice_id
+Type,string
+CUSTOMER STUDIO,mandatory
+PRODUCT STUDIO,mandatory
+CAMPAIGNING,mandatory
+SEARCH TOUCHPOINT,mandatory
+Description,Unique invoice ID

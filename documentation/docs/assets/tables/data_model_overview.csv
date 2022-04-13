@@ -1,0 +1,29 @@
+﻿Data Group,Entity,Type,CUSTOMER STUDIO,PRODUCT STUDIO,CAMPAIGNING,SEARCH TOUCHPOINT,Description
+transactions,invoice_id,string,mandatory,mandatory,mandatory,mandatory,Unique invoice ID
+transactions,invoice_type,string,recommended,recommended,recommended,recommended,Status of the invoice finalized/cancelled/amended
+transactions,purchase_datetime,datetime,mandatory,mandatory,mandatory,mandatory,Timestamp of the invoice
+transactions,customer_id,string,mandatory,mandatory,mandatory,mandatory,Unique customer ID if available (loyalty card or similar)
+transactions,product_id,string,mandatory,mandatory,mandatory,mandatory,Unique product ID
+transactions,store_id,string,recommended,recommended,mandatory,mandatory,Unique ID of store where purchase happen
+transactions,price,float,mandatory,mandatory,mandatory,mandatory,Price paid (either for a single item or of that product or all if more than one)
+transactions,quantity,float,mandatory,mandatory,mandatory,mandatory,Purchased quantity
+transactions,price_before_vat,float,optional,optional,optional,optional,Price of product before VAT
+transactions,product_vat,floa t,optional,optional,optional,optional,VAT on top of product price
+transactions,discount_amount,float,optional,optional,optional,recommended,Discount on product price
+transactions,loyalty_points,float,recommended,recommended,optional,recommended,Points earned by purchasing product
+products,product_id,string,mandatory,mandatory,mandatory,mandatory,Unique product ID
+products,product_name,string,recommended,recommended,recommended,recommended,Unique product name
+products,supplier_id,string,recommended,recommended,recommended,recommended,Unique ID of supplier of product
+products,supplier_name,string,recommended,recommended,recommended,recommended,Unique name of supplier of product
+products,brand_id,string,recommended,recommended,recommended,recommended,Unique ID of brand of product
+products,brand_name,string,recommended,recommended,recommended,recommended,Unique name of brand of product
+products,category_id,string,recommended,recommended,recommended,recommended,Unique ID of category product belongs
+products,lawest_category_level,string,recommended,recommended,recommended,recommended,Category most common used
+products,category_level_0,string,recommended,recommended,recommended,recommended,Highest category level
+products,category_level_1,string,recommended,recommended,recommended,recommended,Category level
+products,category_level_2,string,recommended,recommended,recommended,recommended,Category level
+products,category_level_3,string,recommended,recommended,recommended,recommended,Category level
+products,category_level_4,string,recommended,recommended,recommended,recommended,Category level
+products,category_level_5,string,recommended,recommended,recommended,recommended,Category level
+products,unit_measure,string,recommended,recommended,recommended,recommended,Measure unit for product
+products,additional_product_data,string,optional,recommended,recommended,recommended,Additional, not predefined data

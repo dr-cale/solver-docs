@@ -1,0 +1,799 @@
+openapi: 3.0.0
+info:
+  contact: dusan@thingsolver.com
+  title: Solver Campaigning
+  description: This api is meant for Solver Campaigning
+  version: 1.0.0
+servers:
+- url: https://solver-ai.{customerHost}:{port}/api/latest
+  variables:
+    customerHost:
+      description: Customer hostname
+      default: thingsolver
+    port:
+      default: "443"
+      enum:
+      - "443"
+      - "8443"
+- url: http://solver-ai.{customerId}:{port}/api/latest
+  variables:
+    customerHost:
+      description: Customer hostname
+      default: thingsolver
+    port:
+      default: "80"
+      enum:
+      - "80"
+      - "8080"
+security:
+- bearerAuth: []
+tags:
+- name: Campaignings API
+  description: API used to manage all informations about campaigns
+  externalDocs:
+    url: http://business.solverapi.ai/search
+- name: Campaignings Content API
+  description: API used to manage all informations about campaigns content
+  externalDocs:
+    url: http://business.solverapi.ai/search
+paths:
+  /solver-campaigning/campaignings:
+    get:
+      tags:
+      - Campaignings API
+      summary: List all campaigns
+      description: Return list of all campaigns
+      operationId: Campaigns
+      parameters:
+      - name: offset
+        in: query
+        description: Number of campaigns to skip before any campaigns are retrieved
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 50
+          default: 0
+      - name: limit
+        in: query
+        description: Number of campaigns to be returned
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          example: 50
+          default: 10
+      - name: start_date
+        in: query
+        description: Filter campaign by start date
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "1970-01-01"
+          default: "1970-01-01"
+      - name: end_date
+        in: query
+        description: Filter campaign by end date
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "2070-01-01"
+      - name: author
+        in: query
+        description: Filter campaigns by author
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: JohnDoe
+          default: None
+      - name: channel_type
+        in: query
+        description: Filter campaigns by channel type
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: sms
+      - name: is_approved
+        in: query
+        description: Filter campaign by is_approved status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: True
+          default: False
+      - name: is_sent
+        in: query
+        description: Filter campaign by is_sent status
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+          example: True
+          default: False
+      responses:
+        "200":
+          description: List of items response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignsResponseList'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    post:
+      tags:
+      - Campaignings API
+      summary: Create Campaign
+      description: Create campaign
+      operationId: AddCampaign
+      requestBody:
+        description: Campaign to be created
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/RequestCampaign'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/{campaign_id}:
+    get:
+      tags:
+      - Campaignings API
+      summary: Campaign by campaign id
+      description: Return campaign by campaign id
+      operationId: CampaignById
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    put:
+      tags:
+      - Campaignings API
+      summary: Update campaign
+      description: Update campaign for campaign id
+      operationId: UpdateCampaign
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      requestBody:
+        description: Campaign to be updated
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/RequestCampaign'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    delete:
+      tags:
+      - Campaignings API
+      summary: Delete campaign
+      description: Delete campaign for campaign id
+      operationId: DeleteCampaign
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      responses:
+        "200":
+          description: Item deleted response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignDeleted'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/{campaign_id}/approve:
+    get:
+      tags:
+      - Campaignings API
+      summary: Approve Campaign
+      description: Approve Campaign
+      operationId: ApproveCampaignByCampaignId
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      responses:
+        "200":
+          description: Approved Campaign Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/ApprovedCampaignResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "403":
+          description: Campaign already approved by current user
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignAlreadyApprovedResponse'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/test-users:
+    get:
+      tags:
+      - Campaignings API
+      summary: Get list of test users
+      description: Return list of test users
+      operationId: ListOfTestUsers
+      responses:
+        "200":
+          description: Test User response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/TestUserResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    post:
+      tags:
+      - Campaignings API
+      summary: Save test user details
+      description: Save test user details
+      operationId: CreateTestUser
+      requestBody:
+        description: Test User details to be saved
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TestUserRequest'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/TestUserResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/test-users/{uid}:
+    get:
+      tags:
+      - Campaignings API
+      summary: Get test user by uid
+      description: Return details about test user
+      operationId: GetTestUserByUID
+      parameters:
+      - name: uid
+        in: path
+        description: Unique test user identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 123
+      responses:
+        "200":
+          description: Test User response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/TestUserResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    put:
+      tags:
+      - Campaignings API
+      parameters:
+      - name: uid
+        in: path
+        description: UID of test user to be updated
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 123
+      summary: Update test user details
+      description: Update test user details
+      operationId: UpdateTestUser
+      requestBody:
+        description: Test User details to be updated
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/TestUserRequest'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/TestUserResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    delete:
+      tags:
+      - Campaignings API
+      parameters:
+      - name: uid
+        in: path
+        description: UID of test user to be deleted
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          example: 123
+      summary: Delete test user details
+      description: Delete test user details
+      operationId: DeletedTestUser
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/jsong:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/TestUserDeletedResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/metrics:
+    get:
+      tags:
+      - Campaignings API
+      summary: Campaign Metrics All campaigns
+      description: Return campaign metrics by campaign id and metric
+      operationId: CampaignMetriscAllCampaigns
+      parameters:
+      - name: metric_id
+        in: query
+        required: false
+        description: Metric Id that will be mapped with metric_meta table
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+          example: "DLR, SEEN, BFL, BFV, BA"
+      - name: group
+        in: query
+        required: false
+        description: Group Name for subcampaigns
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: string
+          example: "A, B, C"
+      - name: start_datetime
+        in: query
+        description: Datetime of campaign start, default is start_time from campaign api
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "2021-11-20"
+      - name: end_datetime
+        in: query
+        description: Datetime of campaign end, default is end_time from campaign api
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "2021-11-20"
+      - name: start
+        in: query
+        description: Start of metrics in response
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: number
+          example: 10
+      - name: size
+        in: query
+        description: Size of number of metrics in response
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: number
+          format: number
+          example: 50
+      - name: audience_name
+        in: query
+        description: Return metrics fro selected audience
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: string
+          example: 'audience-2'
+      responses:
+        "200":
+          description: Metrics responses for all campaigns
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/AllCampaignsMetricsResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/campaignings/{campaign_id}/metrics:
+    get:
+      tags:
+      - Campaignings API
+      summary: Campaign Metrics by campaign id and metric
+      description: Return campaign metrics by campaign id and metric
+      operationId: CampaignMetriscByCampaignId
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: cmp55463
+      - name: start_datetime
+        in: query
+        description: Datetime of campaign start, default is start_time from campaign api
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "2022-02-15"
+      - name: end_datetime
+        in: query
+        description: Datetime of campaign end, default is end_time from campaign api
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+          example: "2022-02-15"
+      - name: metric_id
+        in: query
+        description: Metric Id
+        required: false
+        style: form
+        # explode: true
+        schema:
+          type: string
+          example: "BFL | DLR | BFS | BFM ... "
+      - name: aggregate
+        in: query
+        description: One or multiple aggregate attributes
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          example: "rfmt | group | clv | zip ... "
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignMetricsResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/content:
+    post:
+      tags:
+      - Campaignings Content API
+      summary: Create Campaign Content
+      description: Create Campaign Content
+      operationId: CreateCampaignContent
+      requestBody:
+        description: Campaign Content input to be stored
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/CampaignContentRequest'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'definitions.yml#/components/schemas/CampaignContentResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+  /solver-campaigning/{campaign_id}/content:
+    get:
+      tags:
+      - Campaignings Content API
+      summary: Campaign Content by campaign id for campaign to be sent
+      description: Return campaign content on customer level
+      operationId: CampaignContentByCampaignId
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique campaign identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignContentResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+    put:
+      tags:
+      - Campaignings Content API
+      summary: Update Campaign Content info
+      description: Update campaign content for customer id for personalized campaigns
+      operationId: UpdateCampaignContent
+      parameters:
+      - name: campaign_id
+        in: path
+        description: Unique customer identifier
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          example: "55463"
+      requestBody:
+        description: Content per customer to be saved
+        content:
+          application/json:
+            schema:
+              $ref: 'definitions.yml#/components/schemas/CampaignContentUpdatePayload'
+        required: true
+      responses:
+        "200":
+          description: Item response
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/CampaignContentResponse'
+        "401":
+          description: Token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/NotAuthorized'
+        "500":
+          description: Database connection error
+          content:
+            application/json:
+              schema:
+                $ref: 'definitions.yml#/components/schemas/Error'
+

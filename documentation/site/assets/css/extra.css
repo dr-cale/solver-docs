@@ -1,0 +1,42 @@
+:root {
+  --md-primary-fg-color: #20344F;
+  --md-accent-fg-color: #20344F;
+}
+
+.md-sidebar--primary {
+  order: 0;
+}
+
+.twitter {
+  color: #1DA1F2;
+}
+
+.md-grid {
+  max-width: 1440px; 
+}
+
+
+/* .background-color {hsl(0deg 0% 100% / 70%);} */
+
+.highlight-code {
+  position: relative;
+}
+
+.microlight {
+    overflow-y: auto;
+    max-height: 400px;
+    min-height: 6em;
+  }
+
+.code {
+    white-space: pre-wrap !important;
+    word-break: break-all;
+    }
+
+
+.root {--md-code-bg-color: #f5f20f}
+
+.background-color {color: #f5f20f}
+
+
+.skip {color: rgba(22, 22, 22, 22)}
