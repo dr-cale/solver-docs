@@ -24,6 +24,8 @@ jobs:
         run: pip3 install -r documentation/.github/requirements.txt
       #- name: List installed packages
       #  run: pip3 freeze | grep -e tornado -e markdown -e mkdocs
+      - name: Slugs check
+        run: pip3 freeze | grep pymdown
       - name: Build website
         run: mkdocs build -f documentation/mkdocs.yml
       - name: Set AWS credentials
