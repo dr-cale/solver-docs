@@ -7,7 +7,7 @@ mkdocs-bibtex==2.0.3
 mkdocs-img2fig-plugin==0.9.3
 mkdocs-mermaid2-plugin==0.5.2
 mkdocs-render-swagger-plugin==0.0.3
-jinja2>=2.1.0
+jinja2>=2.10.2
 markdown==3.3.6
 mkdocs-awesome-pages-plugin==2.7.0
 mkdocs-bibtex==2.0.3
