@@ -20,6 +20,8 @@ jobs:
         run: sudo apt update
       - name: Install Python3
         run: sudo apt install -y python3-pip
+      - name: Install Jinja2 of version 2.10.2
+        run: pip3 install --upgrade jinja2==2.10.2
       - name: Install MkDocs and its plugins
         run: pip3 install -r documentation/.github/requirements.txt
       - name: List installed packages
