@@ -4,8 +4,8 @@
 }
 
 #api-thingsolver-url {
-  color: #0056d6;
-  font-weight: 700;
+  color: #0056d6 !important;
+  font-weight: 700 !important;
 }
 
 table thead tr {
