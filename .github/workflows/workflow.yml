@@ -28,10 +28,8 @@ jobs:
         run: pip3 install mkdocs-awesome-pages-plugin==2.7.0
       - name: Check that one MkDocs plugin
         run: pip3 freeze | grep -i mkdocs
-      - name: Get current directory
-        run:  pwd
       - name: Install MkDocs plugins
-        run: pip3 install -r ../requirements.txt
+        run: pip3 install -r requirements.txt
       - name: List installed packages
         run: pip3 freeze
       - name: Build website
