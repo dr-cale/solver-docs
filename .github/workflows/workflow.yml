@@ -1,4 +1,4 @@
-name: "Deployment to S3"
+name: "Deploy to S3"
 
 on:
   push:
@@ -42,4 +42,3 @@ jobs:
           aws-region: eu-central-1
       - name: Copy over to S3
         run: aws s3 sync ./build/. s3://solver-ai-suite-mkdocs/solver-ai-suite-documentation/
-        
