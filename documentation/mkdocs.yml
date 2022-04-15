@@ -1,5 +1,6 @@
 site_name: Solver AI Suite
-site_author: Dragan Smiljanic
+
+site_author: Sinisa Jovic, Dragan Smiljanic
 
 theme:
     palette:
@@ -94,7 +95,9 @@ nav:
   - Documentation:
     - User Guide:
       - User Guide Overview: user-guide/index.md
+      - Customer Studio: user-guide/studios/customer-studio.md
       - Campaigning Studio: user-guide/studios/campaigning-studio.md
+      - Touchpoint Studio: user-guide/studios/touchpoint-studio.md
 
 
 extra:
@@ -151,6 +154,9 @@ markdown_extensions:
   - codehilite
   - meta
   - attr_list
+  - toc:
+      slugify: !!python/name:pymdownx.slugs.uslugify
+      permalink: ""
   - pymdownx.details
   - pymdownx.progressbar
   - pymdownx.betterem:
@@ -165,27 +171,28 @@ markdown_extensions:
       custom_fences:
         - name: mermaid
           class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 
 plugins:
   - search
   - mermaid2
+  - render_swagger
   - awesome-pages
   - tags
-  - render_swagger
 
 extra_css:
   - assets/css/extra.css
-  # - assets/css/swagger-ui.css
 
 extra_javascript:
    - https://cdnjs.cloudflare.com/ajax/libs/tablesort/5.2.1/tablesort.min.js
    - assets/javascripts/tablesort.js
    - https://unpkg.com/mermaid@8.4.8/dist/mermaid.min.js
-  #  - assets/javascripts/swagger-ui-bundle.js
-   - javascripts/tablesort.js
+
 
 use_directory_urls: false
-

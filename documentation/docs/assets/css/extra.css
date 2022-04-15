@@ -40,3 +40,97 @@
 
 
 .skip {color: rgba(22, 22, 22, 22)}
+
+/* SWAGGER */
+.info {
+  display: none;
+}
+.swagger-ui .opblock .opblock-summary{
+  background-color: rgb(248, 242, 242) !important;  
+}
+
+.swagger-ui .opblock.opblock-get{
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-get .opblock-summary-method {
+  background: #95c6f7 !important;
+}
+
+.opblock.opblock-post .opblock-summary-method {
+  background: #99d4ba !important;
+}
+
+.opblock.opblock-put .opblock-summary-method {
+  background: #f7d095 !important;
+}
+
+.opblock.opblock-delete .opblock-summary-method {
+  background: #ec9d9d !important;
+}
+
+
+.opblock.opblock-get .opblock-summary {
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-post .opblock-summary {
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-put .opblock-summary {
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-delete .opblock-summary {
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-get {
+  background: rgb(248, 242, 242) !important;
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-post {
+  background: rgb(248, 242, 242) !important;
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-put {
+  background: rgb(248, 242, 242) !important;
+  border-color: rgb(248, 242, 242) !important;
+}
+
+.opblock.opblock-delete {
+  background: rgb(248, 242, 242) !important;
+  border-color: rgb(248, 242, 242) !important;
+}
+
+span[style*="color: rgb(162, 252, 162);"]{ color: rgb(27, 29, 104) !important; }
+span[style*="color: rgb(252, 194, 140);"]{ color: rgb(27, 29, 104) !important; }
+span[style*="color: rgb(211, 99, 99);"]{ color: rgb(27, 29, 104) !important; }
+span[style*="color: rgb(51, 51, 51);"]{ color: rgb(255, 255, 255) !important; }
+span[style*="background: rgb(51, 51, 51);"]{ background: rgb(255, 255, 255) !important; }
+
+.example.microlight{
+  background: rgb(248, 242, 242) !important;
+  padding: 0.1em
+}
+
+span[style*="color: #F5F5F5;"]{ color: rgb(255, 255, 255) !important; }
+
+.md-typeset code{
+  background-color: #FFFFFF!important;
+}
+
+/* payload font */
+.swagger-ui code {
+  font-family: monaco,monospace;
+}
+
+code, .code {
+  font-family: monaco,
+               monospace;
+}
+
+/* SWAGGER END */

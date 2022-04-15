@@ -1,7 +1,4 @@
-
 title: Solver AI Suite
-template: theme/main.html
-
 # Welcome to Solver AI Suite
 
 For full API documentation visit [API Docs](https://api.thingsolver.com){#api-thingsolver-url target=_blank}.
@@ -131,3 +128,4 @@ For full API documentation visit [API Docs](https://api.thingsolver.com){#api-th
 
 | Entity       |  Type          | Mandatory | What to discuss |
 |:------------:|:-------------:|:------------:| :------------:|
+
