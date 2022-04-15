@@ -40,7 +40,5 @@ jobs:
           aws-access-key-id: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws-secret-access-key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws-region: eu-central-1
-      - name: Check folder structure
-        run: pwd && ls -lh
-      #- name: Copy over to S3
-      #  run: aws s3 sync ./build/. s3://solver-ai-suite-mkdocs/solver-ai-suite-documentation/
+      - name: Copy over to S3
+        run: aws s3 sync . s3://solver-ai-suite-mkdocs/solver-ai-suite-documentation/
