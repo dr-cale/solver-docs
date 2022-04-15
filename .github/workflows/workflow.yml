@@ -29,7 +29,7 @@ jobs:
       - name: Check that one MkDocs plugin
         run: pip3 freeze | grep -i mkdocs
       - name: Install MkDocs plugins
-        run: pip3 install -r .github/requirements.txt
+        run: pip3 install -r ../requirements.txt
       - name: List installed packages
         run: pip3 freeze
       - name: Build website
