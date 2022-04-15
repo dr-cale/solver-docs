@@ -131,4 +131,3 @@ For full API documentation visit [API Docs](https://api.thingsolver.com){#api-th
 
 | Entity       |  Type          | Mandatory | What to discuss |
 |:------------:|:-------------:|:------------:| :------------:|
->>>>>>> 93835b7beeafcf35545f7855689c7c417406d82f
